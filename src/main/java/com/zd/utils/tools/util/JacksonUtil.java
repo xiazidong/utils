@@ -1,6 +1,5 @@
 package com.zd.utils.tools.util;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,27 +11,13 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class JsonUtil {
+public class JacksonUtil {
 
     private static ObjectMapper om = null;
 
     static {
         om = new ObjectMapper();
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
-
-    /**
-     * 判断是否为 json格式
-     * @param content
-     * @return
-     */
-    public static boolean isJson(String content) {
-        try {
-            JSONObject.parseObject(content);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     /**
@@ -120,6 +105,17 @@ public class JsonUtil {
 
     /**
      * 实体返回
+     * 例如 json形式的 R<Object> 转换为对象
+     * ex: R<MyShipperDetailResponse> r = JsonParse.apiJsonToBean(post.getBody(), MyShipperDetailResponse.class);
+     * 存在一个问题，如果 原始的 R对象中的 message存在 ""，再次还原的时候会变为 """"，需要去掉多余的 ""
+     *  if (r.getCode() != null) {
+     *      String replace = r.getCode().replace("\"", "");
+     *      r.setCode(replace);
+     *  }
+     *  if (r.getMessage() != null) {
+     *      String replace = r.getMessage().replace("\"", "");
+     *      r.setMessage(replace);
+     *  }
      * @param result
      * @param bean
      * @param <T>

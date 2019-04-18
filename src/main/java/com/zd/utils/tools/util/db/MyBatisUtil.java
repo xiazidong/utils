@@ -1,4 +1,4 @@
-package com.zd.utils.tools.util;
+package com.zd.utils.tools.util.db;
 
 public class MyBatisUtil {
 

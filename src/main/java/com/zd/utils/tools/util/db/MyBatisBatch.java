@@ -1,4 +1,4 @@
-package com.zd.utils.tools.util;
+package com.zd.utils.tools.util.db;
 
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
