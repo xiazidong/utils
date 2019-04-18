@@ -20,7 +20,7 @@ public class PasswordEncoder {
      * @param hex
      * @return
      */
-    public static byte[] hexStringToByte(String hex) {
+    private static byte[] hexStringToByte(String hex) {
         int len = (hex.length() / 2);
         byte[] result = new byte[len];
         char[] hexChars = hex.toCharArray();
@@ -38,10 +38,10 @@ public class PasswordEncoder {
      * @param b
      * @return
      */
-    public static String byteToHexString(byte[] b) {
-        StringBuffer hexString = new StringBuffer();
-        for (int i = 0; i < b.length; i++) {
-            String hex = Integer.toHexString(b[i] & 0xFF);
+    private static String byteToHexString(byte[] b) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte aB : b) {
+            String hex = Integer.toHexString(aB & 0xFF);
             if (hex.length() == 1) {
                 hex = '0' + hex;
             }

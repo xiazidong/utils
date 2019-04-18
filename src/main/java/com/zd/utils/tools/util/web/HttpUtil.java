@@ -41,14 +41,14 @@ public class HttpUtil {
             conn.setConnectTimeout(5 * 1000);
             // 通过输入流获取图片数据
             InputStream inStream = conn.getInputStream();
-            byte data[] = IOUtil.readInputStream(inStream);
+            byte[] data = IOUtil.readInputStream(inStream);
             //设置返回的文件类型
             response.setContentType("image/jpg");
             OutputStream out = response.getOutputStream();
             out.write(data);
             out.flush();
         } catch (Exception e) {
-            // e.printStackTrace();
+            log.error("获取图片资源发生异常，url:{}，异常原因:{}",url,e.getMessage());
         }
     }
 
@@ -73,16 +73,14 @@ public class HttpUtil {
         }
     }
 
-
     /**
      * 修改 header信息，key-value键值对加入到 header中
-     * @param request httpReq
-     * @param key header_key
-     * @param value header_value
+     * @param request req
+     * @param key key
+     * @param value value
      */
-    private void reflectSetparam(HttpServletRequest request, String key, String value) {
+    public static void reflectSetparam(HttpServletRequest request, String key, String value) {
         Class<? extends HttpServletRequest> requestClass = request.getClass();
-        log.debug("request实现类=" + requestClass.getName());
         try {
             Field request1 = requestClass.getDeclaredField("request");
             request1.setAccessible(true);
@@ -90,7 +88,6 @@ public class HttpUtil {
             Field coyoteRequest = o.getClass().getDeclaredField("coyoteRequest");
             coyoteRequest.setAccessible(true);
             Object o1 = coyoteRequest.get(o);
-            log.debug("coyoteRequest实现类=" + o1.getClass().getName());
             Field headers = o1.getClass().getDeclaredField("headers");
             headers.setAccessible(true);
             MimeHeaders o2 = (MimeHeaders) headers.get(o1);
@@ -98,15 +95,16 @@ public class HttpUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        log.debug("重写 request中的 header完毕！从 request.header中获取到的:{}={}", key, request.getHeader(key));
     }
 
     /**
      * 返回错误信息
      * 可以用在 filter、intercepter中
      * @param response httpRes
-     * @param msg
-     * @param code
-     * @throws IOException
+     * @param msg 描述信息
+     * @param code 错误编码
+     * @throws IOException io
      */
     public void returnFailMsg(ServletResponse response, String msg, String code) throws IOException {
         response.setContentType("application/json; charset=utf-8");
