@@ -3,6 +3,7 @@ package com.zd.utils.tools.util;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 /**
@@ -13,6 +14,42 @@ import java.util.Map;
  * 基础公共工具集。
  */
 public class NullCheckUtil {
+
+    /**
+     * 判断集合是否为空
+     * @param collection
+     * @return
+     */
+    public static boolean isEmpty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
+    /**
+     * 判断Map是否为空
+     * @param map
+     * @return
+     */
+    public static boolean isEmpty(Map<?, ?> map) {
+        return map == null || map.isEmpty();
+    }
+
+    /**
+     * 判断数组是否为空
+     * @param array
+     * @return
+     */
+    public static boolean isEmpty(Object[] array) {
+        return array == null || array.length == 0;
+    }
+
+    /**
+     * 判断List是否为空
+     * @param list
+     * @return
+     */
+    public static boolean isEmpty(List<Object> list) {
+        return list == null || list.size() == 0;
+    }
 
     /**
      * 检查对象是否为空。

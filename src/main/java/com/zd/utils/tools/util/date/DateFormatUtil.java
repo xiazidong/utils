@@ -1,4 +1,4 @@
-package com.zd.utils.tools.util;
+package com.zd.utils.tools.util.date;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -28,7 +28,11 @@ public class DateFormatUtil {
         }
     }
 
-    //获取当天的开始时间
+
+    /**
+     * 获取当天的开始时间
+     * @return
+     */
     public static Date getDayBegin() {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -38,7 +42,10 @@ public class DateFormatUtil {
         return cal.getTime();
     }
 
-    //获取当天的结束时间
+    /**
+     * 获取当天的结束时间
+     * @return
+     */
     public static Date getDayEnd() {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 23);
