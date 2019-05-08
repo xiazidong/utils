@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ParamAspect {
 
-    // private final String ExpGetResultDataPonit = "execution(* com.sf..*())";
     private final String ExpGetResultDataPonit = "execution(* com.sf.controller.LoginController.*(..))";
 
 

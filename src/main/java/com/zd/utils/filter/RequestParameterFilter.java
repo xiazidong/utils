@@ -28,7 +28,7 @@ public class RequestParameterFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         /*如果请求路径是为app,进行过滤对参数parameter内容解密，放入 request.parameter中*/
-        if (request.getRequestURI().indexOf(AUTH_PATH) != -1) {
+        if (request.getRequestURI().contains(AUTH_PATH)) {
             /*1.获取加密串,进行解密 or 加密*/
 
             /*2.解密出加密串，我和前台约定的是JSON,获取到JSON我将其转换为map，这里我直接用手动封装map代替*/
