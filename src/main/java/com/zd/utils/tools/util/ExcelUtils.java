@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-import static com.zd.utils.tools.util.io.IOUtil.getType;
+import static com.zd.utils.tools.util.io.FileUtils.getType;
 
 /**
  * @author Zidong

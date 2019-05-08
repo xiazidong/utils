@@ -5,11 +5,9 @@ package com.zd.utils.tools.util;
  * @date 2019/4/8 2:46 PM
  */
 public class StringUtil {
+
     /**
      * 去掉字符串前后逗号
-     *
-     * @param str
-     * @return
      */
     public static String isStarOrEndWithComma(String str) {
         if (str != null && !"".equals(str)) {
