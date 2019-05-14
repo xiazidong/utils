@@ -14,7 +14,7 @@ public class ReadFile {
 
     @Test
     public void xx() throws IOException {
-        testLoopOutAllFileName("/Users/michen/myCode/mgmt-itsc-hd-hz-dp/src/main");
+        testLoopOutAllFileName("/Users/xx.txt");
     }
 
     /**

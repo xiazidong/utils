@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2019/5/8 7:24 PM
  */
 public class WebUtil {
+
     public static HttpServletRequest getHttpRequest() {
         try {
             return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
