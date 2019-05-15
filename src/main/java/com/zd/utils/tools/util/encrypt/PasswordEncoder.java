@@ -1,4 +1,4 @@
-package com.zd.utils.tools.util.auth;
+package com.zd.utils.tools.util.encrypt;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

@@ -14,7 +14,48 @@ class DESUtils {
     /**
      * 默认key
      */
-    final static String KEY = "ScAKC0XhadTHT3Al0QIDAQAB";
+    private final static String KEY = "ScAKC0XhadTHT3Al0QIDAQAB";
+
+    /**
+     * DES加密
+     *
+     * @param value 待加密字符
+     * @param key   若key为空，则使用默认key
+     * @return 加密成功返回密文，否则返回null
+     */
+    public String desEncrypt(String value, String key) {
+        key = key == null ? DESUtils.KEY : key;
+        String result = null;
+
+        try {
+            if (value != null && !"".equals(value.trim())) {
+                result = encrypt(value, key);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * DES解密
+     *
+     * @param value 待解密字符
+     * @param key   若key为空，则使用默认key
+     */
+    public String desDecrypt(String value, String key) {
+        key = key == null ? DESUtils.KEY : key;
+        String result = null;
+
+        try {
+            if (value != null && !"".equals(value.trim())) {
+                result = decrypt(value, key);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * DES加密
@@ -23,7 +64,7 @@ class DESUtils {
      * @param key  校验位
      */
     @SuppressWarnings("restriction")
-    static String encrypt(String data, String key) {
+    private String encrypt(String data, String key) {
         String encryptedData = null;
         try {
             // DES算法要求有一个可信任的随机数源  
@@ -51,7 +92,7 @@ class DESUtils {
      * @return
      */
     @SuppressWarnings("restriction")
-    static String decrypt(String cryptData, String key) {
+    private String decrypt(String cryptData, String key) {
         String decryptedData = null;
         try {
             // DES算法要求有一个可信任的随机数源  

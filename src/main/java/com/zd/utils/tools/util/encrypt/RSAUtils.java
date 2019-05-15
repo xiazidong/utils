@@ -1,6 +1,5 @@
-package com.zd.utils.tools.util.auth;
+package com.zd.utils.tools.util.encrypt;
 
-import com.zd.utils.tools.util.Base64Utils;
 
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;

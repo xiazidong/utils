@@ -49,14 +49,16 @@ public class CommonFieldInterceptor implements Interceptor {
                 // 如果获取到 2个参数，在第二个参数中仍有两个参数，第二个参数中的 "param1"中才有参数列表
                 parameter = invocation.getArgs()[1];
             } catch (Exception e) {
-                logger.error("公共字段发生异常，异常信息为：{}", e.getMessage());
+                logger.error("公共字段拦截器发生异常，异常信息为：{}", e.getMessage());
             }
             if (parameter == null) {
+                // 不是需要被攔截的類型, 不做操作
                 return invocation.proceed();
             }
             Date time = new Date();
             Class classParameter = parameter.getClass();
             Field[] fields = classParameter.getDeclaredFields();
+            // 兼容处理
             if (fields.length == 1) {
                 Map paramMap = (Map) parameter;
                 parameter = paramMap.get("param1");

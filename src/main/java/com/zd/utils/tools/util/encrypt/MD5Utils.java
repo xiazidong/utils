@@ -6,12 +6,39 @@ import java.security.NoSuchAlgorithmException;
 /**
  * MD5加密
  */
-class MD5Utils {
-    protected final static String MD5_KEY = "MD5";
+public class MD5Utils {
 
-    protected final static String SHA_KEY = "SHA1";
+    private final static String MD5_KEY = "MD5";
 
-    protected static String encrypt(String value, String key) {
+    private final static String SHA_KEY = "SHA1";
+
+    /**
+     * MD5 加密
+     *
+     * @param value 待加密字符
+     */
+    public static String md5Encrypt(String value) {
+        String result = null;
+        if (value != null && !"".equals(value.trim())) {
+            result = MD5Utils.encrypt(value, MD5Utils.MD5_KEY);
+        }
+        return result;
+    }
+
+    /**
+     * SHA加密
+     *
+     * @param value 待加密字符
+     */
+    public static String shaEncrypt(String value) {
+        String result = null;
+        if (value != null && !"".equals(value.trim())) {
+            result = MD5Utils.encrypt(value, MD5Utils.SHA_KEY);
+        }
+        return result;
+    }
+
+    private static String encrypt(String value, String key) {
         try {
             // 拿到一个MD5转换器（如果想要SHA1参数换成”SHA1”）
             MessageDigest messageDigest = MessageDigest.getInstance(key);
@@ -29,7 +56,6 @@ class MD5Utils {
     }
 
     private static String byteArrayToHex(byte[] byteArray) {
-
         // 首先初始化一个字符数组，用来存放每个16进制字符
         char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'A', 'B', 'C', 'D', 'E', 'F'};

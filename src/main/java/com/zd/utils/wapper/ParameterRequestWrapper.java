@@ -21,7 +21,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
      * @param request httpReq
      * @throws IllegalArgumentException if the request is null
      */
-    public ParameterRequestWrapper(HttpServletRequest request) {
+    private ParameterRequestWrapper(HttpServletRequest request) {
         super(request);
         //将参数表，赋予给当前的Map以便于持有request中的参数
         this.params.putAll(request.getParameterMap());

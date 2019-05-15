@@ -3,7 +3,7 @@ package com.zd.utils.tools.util.regex;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.zd.utils.constant.Pattern.*;
+import static com.zd.utils.constant.PatternConstant.*;
 
 /**
  * 正则表达式工具类，验证数据是否符合规范
@@ -51,6 +51,14 @@ public class RegexUtils {
      */
     public static boolean isInteger(String value) {
         Pattern pattern = Pattern.compile(COMPLATE_INTEGER);
+        return pattern.matcher(value).matches();
+    }
+
+    /**
+     * 判断是否为IP地址
+     */
+    public static boolean isIp(String value) {
+        Pattern pattern = Pattern.compile(IP_PATTERN_CONSTANT);
         return pattern.matcher(value).matches();
     }
 }

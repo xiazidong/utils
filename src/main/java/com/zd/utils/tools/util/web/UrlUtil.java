@@ -1,7 +1,9 @@
 package com.zd.utils.tools.util.web;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -11,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.zd.utils.constant.HttpConstant.HTTPS_SCHEME;
+import static com.zd.utils.constant.HttpConstant.HTTP_SCHEME;
 
 /**
  * @author Zidong
@@ -46,6 +51,17 @@ public class UrlUtil {
         }
     }
 
+    public static String getURI(HttpServletRequest request) {
+        UrlPathHelper helper = new UrlPathHelper();
+        String uri = helper.getOriginatingRequestUri(request);
+        String ctx = helper.getOriginatingContextPath(request);
+        if (!StringUtils.isBlank(ctx)) {
+            return uri.substring(ctx.length());
+        } else {
+            return uri;
+        }
+    }
+
     /**
      * 获取完整 url，带参数
      */
@@ -60,7 +76,7 @@ public class UrlUtil {
 
     /**
      * 获取 url中的参数
-     * @param url
+     * @param url url
      * @return Map集合
      */
     public static Map<String, List<String>> getQueryParams(String url) {
@@ -84,5 +100,24 @@ public class UrlUtil {
         } catch (UnsupportedEncodingException ex) {
             throw new AssertionError(ex);
         }
+    }
+
+    /**
+     * http协议转https协议
+     * @param uri 链接地址
+     * @return https协议地址
+     */
+    public static String httpToHttps(String uri) {
+        if (StringUtils.isBlank(uri)) {
+            return uri;
+        }
+        uri = uri.trim();
+        if (!uri.startsWith(HTTP_SCHEME) && !uri.startsWith(HTTPS_SCHEME)) {
+            throw new IllegalArgumentException("URI must start width 'http://' or 'https://'");
+        }
+        if (uri.startsWith(HTTP_SCHEME)) {
+            return uri.replace(HTTP_SCHEME, HTTPS_SCHEME);
+        }
+        return uri;
     }
 }

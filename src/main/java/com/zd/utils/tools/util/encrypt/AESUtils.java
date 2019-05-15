@@ -14,32 +14,49 @@ class AESUtils {
     /**
      * 默认秘钥
      */
-	static final String KEY = "NOPO3nzMD3dndwS0MccuMeXCHgVlGOoYyFwLdS24Im2e7YyhB0wrUsyYf0";
-
-    /**
-     *  AES解密
-     *
-     * @param encryptValue
-     * 						待解密内容
-     * @param key key
-     */
-    static String decrypt(String encryptValue, String key) throws Exception {
-        return aesDecryptByBytes(base64Decode(encryptValue), key);
-    }
+	private static final String KEY = "NOPO3nzMD3dndwS0MccuMeXCHgVlGOoYyFwLdS24Im2e7YyhB0wrUsyYf0";
 
     /**
      * AES加密
      *
-     * @param value
-     * 					待加密内容
-     * @param key
-     * 					秘钥
-     * @throws Exception
+     * @param value 待加密内容
+     * @param key   秘钥
      */
-    static String encrypt(String value, String key) throws Exception {
-        return base64Encode(aesEncryptToBytes(value, key));  
-    }  
-	
+    public static String aesEncrypt(String value, String key) {
+        key = key == null ? AESUtils.KEY : key;
+        String result = null;
+        try {
+            if (value != null && !"".equals(value.trim())) {
+                result = base64Encode(aesEncryptToBytes(value, key));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
+     * AES解密
+     *
+     * @param value 待解密内容
+     * @param key   秘钥
+     */
+    public static String aesDecrypt(String value, String key) {
+        key = key == null ? AESUtils.KEY : key;
+        String result = null;
+        try {
+            if (value != null && !"".equals(value.trim())) {
+                result = aesDecryptByBytes(base64Decode(value), key);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
     private static String base64Encode(byte[] bytes){
         return Base64Utils.encode(bytes);
     }
