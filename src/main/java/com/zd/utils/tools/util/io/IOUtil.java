@@ -26,15 +26,14 @@ public class IOUtil {
     public static byte[] readInputStream(InputStream inStream) throws Exception {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[2048];
-        int len = 0;
+        int len;
         while ((len = inStream.read(buffer)) != -1) {
             outStream.write(buffer, 0, len);
         }
         inStream.close();
         return outStream.toByteArray();
     }
-
-    public static void inputStream(InputStream inputStream) throws IOException {
+    static void inputStream(InputStream inputStream) throws IOException {
         if (inputStream != null) {
             try {
                 inputStream.close();

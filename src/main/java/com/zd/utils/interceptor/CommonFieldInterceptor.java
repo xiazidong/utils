@@ -21,6 +21,7 @@ import java.util.Properties;
  */
 @Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
 public class CommonFieldInterceptor implements Interceptor {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private static final String FIELD_CAMELCASE_CREATE_TIME = "createTime";

@@ -20,6 +20,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class RedisConfig {
 
+    // todo x 存在一个问题：和 pg框架整合会出现 shiro异常
+
     /**
      * redisTemplate 序列化使用的jdkSerializeable, 存储二进制字节码, 所以自定义序列化类
      * @param redisConnectionFactory

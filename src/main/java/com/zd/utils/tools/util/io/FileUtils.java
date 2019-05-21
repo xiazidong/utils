@@ -67,7 +67,7 @@ public class FileUtils {
     public static long getFileSize(File file) throws Exception {
         long size = 0;
         if (file.exists()) {
-            FileInputStream fis = null;
+            FileInputStream fis;
             fis = new FileInputStream(file);
             size = fis.available();
         } else {
@@ -93,8 +93,10 @@ public class FileUtils {
             }
             // 如果目录中有文件递归删除文件
             File[] files = path.listFiles();
-            for (File file : files) {
-                deleteAll(file.getAbsolutePath());
+            if (files != null) {
+                for (File file : files) {
+                    deleteAll(file.getAbsolutePath());
+                }
             }
             path.delete();
         } catch (Exception e) {

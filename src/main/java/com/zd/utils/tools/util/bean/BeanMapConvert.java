@@ -31,10 +31,9 @@ public class BeanMapConvert {
                 String key = property.getName();
                 // 过滤class属性
                 if (!"class".equals(key)) {
-                    // 得到property对应的getter方法
+                    // 得到 property对应的 getter方法
                     Method getter = property.getReadMethod();
                     Object value = getter.invoke(object);
-
                     map.put(key, value);
                 }
             }
@@ -59,12 +58,11 @@ public class BeanMapConvert {
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(object.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-
             for (PropertyDescriptor property : propertyDescriptors) {
                 String key = property.getName();
                 if (map.containsKey(key)) {
                     Object value = map.get(key);
-                    // 得到property对应的setter方法
+                    // 得到 property对应的 setter方法
                     Method setter = property.getWriteMethod();
                     setter.invoke(object, value);
                 }
