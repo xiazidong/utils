@@ -13,33 +13,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>
  * RSA公钥/私钥/签名工具包
- * </p>
- * <p>
- * 罗纳德·李维斯特（Ron [R]ivest）、阿迪·萨莫尔（Adi [S]hamir）和伦纳德·阿德曼（Leonard [A]dleman）
- * </p>
- * <p>
- * 字符串格式的密钥在未在特殊说明情况下都为BASE64编码格式<br/>
- * 由于非对称加密速度极其缓慢，一般文件不使用它来加密而是使用对称加密，<br/>
- * 非对称加密算法可以用来对对称加密的密钥加密，这样保证密钥的安全也就保证了数据的安全
- * </p>
- *
- * @author IceWee
- * @date 2012-4-26
- * @version 1.0
  */
 public class RSAUtils {
 
     /**
      * 加密算法RSA
      */
-    public static final String KEY_ALGORITHM = "RSA";
+    private static final String KEY_ALGORITHM = "RSA";
 
     /**
      * 签名算法
      */
-    public static final String SIGNATURE_ALGORITHM = "MD5withRSA";
+    private static final String SIGNATURE_ALGORITHM = "MD5withRSA";
 
     /**
      * 获取公钥的key
@@ -86,11 +72,8 @@ public class RSAUtils {
      * 用私钥对信息生成数字签名
      * </p>
      *
-     * @param data
-     *            已加密数据
-     * @param privateKey
-     *            私钥(BASE64编码)
-     *
+     * @param data       已加密数据
+     * @param privateKey 私钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -110,16 +93,11 @@ public class RSAUtils {
      * 校验数字签名
      * </p>
      *
-     * @param data
-     *            已加密数据
-     * @param publicKey
-     *            公钥(BASE64编码)
-     * @param sign
-     *            数字签名
-     *
+     * @param data      已加密数据
+     * @param publicKey 公钥(BASE64编码)
+     * @param sign      数字签名
      * @return
      * @throws Exception
-     *
      */
     public static boolean verify(byte[] data, String publicKey, String sign) throws Exception {
         byte[] keyBytes = Base64Utils.decode(publicKey);
@@ -137,10 +115,8 @@ public class RSAUtils {
      * 私钥解密
      * </p>
      *
-     * @param encryptedData
-     *            已加密数据
-     * @param privateKey
-     *            私钥(BASE64编码)
+     * @param encryptedData 已加密数据
+     * @param privateKey    私钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -177,10 +153,8 @@ public class RSAUtils {
      * 公钥解密
      * </p>
      *
-     * @param encryptedData
-     *            已加密数据
-     * @param publicKey
-     *            公钥(BASE64编码)
+     * @param encryptedData 已加密数据
+     * @param publicKey     公钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -217,10 +191,8 @@ public class RSAUtils {
      * 公钥加密
      * </p>
      *
-     * @param data
-     *            源数据
-     * @param publicKey
-     *            公钥(BASE64编码)
+     * @param data      源数据
+     * @param publicKey 公钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -258,10 +230,8 @@ public class RSAUtils {
      * 私钥加密
      * </p>
      *
-     * @param data
-     *            源数据
-     * @param privateKey
-     *            私钥(BASE64编码)
+     * @param data       源数据
+     * @param privateKey 私钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -298,12 +268,11 @@ public class RSAUtils {
      * 获取私钥
      * </p>
      *
-     * @param keyMap
-     *            密钥对
+     * @param keyMap 密钥对
      * @return
      * @throws Exception
      */
-    public static String getPrivateKey(Map<String, Object> keyMap) throws Exception {
+    public static String getPrivateKey(Map<String, Object> keyMap){
         Key key = (Key) keyMap.get(PRIVATE_KEY);
         return Base64Utils.encode(key.getEncoded());
     }
@@ -313,12 +282,11 @@ public class RSAUtils {
      * 获取公钥
      * </p>
      *
-     * @param keyMap
-     *            密钥对
+     * @param keyMap 密钥对
      * @return
      * @throws Exception
      */
-    public static String getPublicKey(Map<String, Object> keyMap) throws Exception {
+    public static String getPublicKey(Map<String, Object> keyMap) {
         Key key = (Key) keyMap.get(PUBLIC_KEY);
         return Base64Utils.encode(key.getEncoded());
     }
@@ -340,5 +308,17 @@ public class RSAUtils {
         // 以utf-8的方式生成字符串
         temp = new String(RSAUtils.decryptByPrivateKey(rs, privateKey), StandardCharsets.UTF_8);
         return temp;
+    }
+
+    public static void main(String[] args) throws Exception {
+        Map<String, Object> keyPair = genKeyPair();
+        String publicKey = getPublicKey(keyPair);
+        String privateKey = getPrivateKey(keyPair);
+        // base64测试
+        // new String(Base64Utils.decode("MTIzMTIz".getBytes())
+        String bytes = encryptedDataOnJava("123123", publicKey);
+        String bytes2 = decryptDataOnJava(bytes, privateKey);
+        System.out.println("加密后为："+bytes);
+        System.out.println("解密后为："+bytes2);
     }
 }
