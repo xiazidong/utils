@@ -27,4 +27,12 @@ public class WebUtil {
             return null;
         }
     }
+
+    public static String getHeader(String headerName) {
+        HttpServletRequest httpRequest = getHttpRequest();
+        if (httpRequest != null) {
+            return httpRequest.getHeader(headerName);
+        }
+        return "";
+    }
 }
