@@ -1,5 +1,7 @@
 package com.zd.utils.enumpack;
 
+import java.util.Arrays;
+
 /**
  * @author Zidong
  * @date 2019/5/21 3:58 PM
@@ -43,5 +45,12 @@ public enum SexEnum implements EnumMessage {
     @Override
     public Object getValue() {
         return code;
+    }
+
+    public static SexEnum findByType(final String type) {
+        return Arrays.stream(values()).filter(value -> value.getCode().equals(type)).findFirst().orElse(null);
+    }
+    public static SexEnum findByTypeInfo(final String typeInfo) {
+        return Arrays.stream(values()).filter(value -> value.getDesc().equals(typeInfo)).findFirst().orElse(null);
     }
 }
