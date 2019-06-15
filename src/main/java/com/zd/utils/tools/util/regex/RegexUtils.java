@@ -61,4 +61,12 @@ public class RegexUtils {
         Pattern pattern = Pattern.compile(IP_PATTERN_CONSTANT);
         return pattern.matcher(value).matches();
     }
+
+    /**
+     * 判断是否为正整数
+     */
+    public static boolean isPositiveInteger(String value) {
+        Pattern pattern = Pattern.compile(POSITIVE_INTEGER);
+        return pattern.matcher(value).matches();
+    }
 }
