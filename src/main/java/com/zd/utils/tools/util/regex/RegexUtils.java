@@ -20,6 +20,14 @@ public class RegexUtils {
     }
 
     /**
+     * 判断是否为手机号 11位
+     */
+    public static boolean isMobilePhone(String phone){
+        Pattern pattern = Pattern.compile(PHONE_RULE);
+        return pattern.matcher(phone).matches();
+    }
+
+    /**
      * 判断输入的字符串是否符合Email格式.
      */
     public static boolean isEmail(String email) {
@@ -68,5 +76,24 @@ public class RegexUtils {
     public static boolean isPositiveInteger(String value) {
         Pattern pattern = Pattern.compile(POSITIVE_INTEGER);
         return pattern.matcher(value).matches();
+    }
+
+
+    /**
+     * 判断是否为正整数
+     */
+    public static boolean ISFLOATING_POINT_NUMBER(String value) {
+        Pattern pattern = Pattern.compile(FLOATING_POINT_NUMBER);
+        return pattern.matcher(value).matches();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(ISFLOATING_POINT_NUMBER("-1"));
+        System.out.println(ISFLOATING_POINT_NUMBER("-1.1"));
+        System.out.println(ISFLOATING_POINT_NUMBER("1"));
+        System.out.println(ISFLOATING_POINT_NUMBER("1.00"));
+        System.out.println(ISFLOATING_POINT_NUMBER("1.11"));
+        System.out.println(ISFLOATING_POINT_NUMBER("1.000"));
+
     }
 }

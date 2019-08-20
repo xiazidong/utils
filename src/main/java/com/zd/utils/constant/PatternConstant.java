@@ -66,4 +66,6 @@ public class PatternConstant {
      */
     public final static String NON_POSITIVE_FLOATING_POINT_NUMBER = "^(-([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*))|0?\\.0+|0$";
 
+    public final static String PHONE_RULE = "^[1][2,3,4,5,6,7,8,9][0-9]{9}$";
+
 }
